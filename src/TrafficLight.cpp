@@ -20,6 +20,14 @@ void MessageQueue<T>::send(T &&msg)
 {
     // FP.4a : The method send should use the mechanisms std::lock_guard<std::mutex> 
     // as well as _condition.notify_one() to add a new message to the queue and afterwards send a notification.
+
+
+    // locks to avoid data race
+    std::lock_guard<std::mutex> u_lock(_mutex);
+    // adds a new message to the queue
+    _queue.push_back(std::move(msg));
+    // sends a notification
+    _cond.notify_one();
 }
 
 
@@ -52,7 +60,7 @@ void TrafficLight::simulate()
 }
 
 // virtual function which is executed in a thread
-void TrafficLight::cycleThroughPhases()
+[[noreturn]] void TrafficLight::cycleThroughPhases()
 {
     // FP.2a : Implement the function with an infinite loop that measures the time between two loop cycles 
     // and toggles the current phase of the traffic light between red and green and sends an update method 
