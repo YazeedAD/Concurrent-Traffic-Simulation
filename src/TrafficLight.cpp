@@ -76,9 +76,9 @@ void TrafficLight::simulate()
 // virtual function which is executed in a thread
 [[noreturn]] void TrafficLight::cycleThroughPhases()
 {
-    // FP.2a : Implement the function with an infinite loop that measures the time between two loop cycles 
-    // and toggles the current phase of the traffic light between red and green and sends an update method 
-    // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
+    // FP.2a : Implement the function with an infinite loop that measures the time between two loop cycles
+    // and toggles the current phase of the traffic light between red and green and sends an update method
+    // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds.
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles.
 
     /*pseudo-random*/
@@ -102,9 +102,9 @@ void TrafficLight::simulate()
             // toggles the current phase of the traffic light between red and green
             _currentPhase = static_cast<TrafficLightPhase>(!_currentPhase);
             // rand for next iteration
-            cycleDuration = rand() % 4000 + 2000;
             // sends an update method  to the message queue using move semantics
             _messageQueue.send(std::move(_currentPhase));
+            startTime = std::chrono::system_clock::now();
 
         }
 
