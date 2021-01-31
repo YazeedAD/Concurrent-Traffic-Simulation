@@ -146,10 +146,11 @@ int main()
         std::shared_ptr<TrafficObject> trafficObject = std::dynamic_pointer_cast<TrafficObject>(vehicles);
         trafficObjects.push_back(trafficObject);
     });
+//
+//    // draw all objects in vector
+//    Graphics *graphics = new Graphics();
+//    graphics->setBgFilename(backgroundImg);
+//    graphics->setTrafficObjects(trafficObjects);
+//    graphics->simulate();
 
-    // draw all objects in vector
-    Graphics *graphics = new Graphics();
-    graphics->setBgFilename(backgroundImg);
-    graphics->setTrafficObjects(trafficObjects);
-    graphics->simulate();
 }
